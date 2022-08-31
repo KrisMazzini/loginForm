@@ -29,18 +29,25 @@ export function LoginForm() {
                 <fieldset name="login-data">
                     {
                         inputs.map(input => (
-                            <Input
-                            key={input.id}
-                            icon={input.icon}
-                            type={input.type}
-                            id={input.id}
-                            label={input.label}
-                            placeholder={input.placeholder}
-                            />
+                                <Input
+                                key={input.id}
+                                icon={input.icon}
+                                type={input.type}
+                                id={input.id}
+                                label={input.label}
+                                placeholder={input.placeholder}
+                                />
                             ))
                         }
                 </fieldset>
             </form>
+            <div id="additional-data">
+                <fieldset form="login-form" name="remember-me">
+                    <input type="checkbox" name="remember-me" value="lembre-me" />
+                </fieldset>
+                <p>Lembre-me</p>
+                <a><p>Esqueci minha senha</p></a>
+            </div>
             <fieldset form="login-form" name="submit">
                 <input type="submit" value="entrar" />
             </fieldset>
@@ -87,6 +94,39 @@ const Container = styled.div`
 
         :active {
             filter: brightness(0.9);
+        }
+    }
+
+    #additional-data {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 5px;
+
+        input {
+            width: 20px;
+            height: 20px;
+        }
+
+        > p {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+
+            color: var(--input-placeholder);
+        }
+
+        > a {
+            flex-grow: 1;
+            text-align: end;
+
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 21px;
+
+            color: var(--primary-color);
         }
     }
 `
