@@ -6,6 +6,7 @@
     --primary-color: #ffc632;
     --input-border: #868686;
     --input-placeholder: #a9afb9;
+    --submit-text: #473404;
 }
 
 html, body, #root {
@@ -19,4 +20,8 @@ html * {
 
 a {
     cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
 }
