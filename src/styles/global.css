@@ -4,9 +4,19 @@
     --background: #191816;
     --form-background: #24221f;
     --primary-color: #ffc632;
+    --input-border: #868686;
+    --input-placeholder: #a9afb9;
+}
+
+html, body, #root {
+    min-height: 100vh;
 }
 
 html * {
     font-family: 'Poppins', sans-serif;
     font-family: 'Roboto', sans-serif;
+}
+
+a {
+    cursor: pointer;
 }
