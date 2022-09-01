@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Input, InputProps } from "../Input";
+import { SubmitButton } from "../SubmitButton";
+import { Checkbox } from "../Checkbox";
 
 import mail from "../../assets/mail.svg"
 import lock from "../../assets/lock.svg"
@@ -30,26 +32,25 @@ export function LoginForm() {
                     {
                         inputs.map(input => (
                                 <Input
-                                key={input.id}
-                                icon={input.icon}
-                                type={input.type}
-                                id={input.id}
-                                label={input.label}
-                                placeholder={input.placeholder}
+                                    key={input.id}
+                                    icon={input.icon}
+                                    type={input.type}
+                                    id={input.id}
+                                    label={input.label}
+                                    placeholder={input.placeholder}
                                 />
                             ))
                         }
                 </fieldset>
             </form>
-            <div id="additional-data">
+            <AdditionalData>
                 <fieldset form="login-form" name="remember-me">
-                    <input type="checkbox" name="remember-me" value="lembre-me" />
+                    <Checkbox key="remember-me" id="remember-me" label="Lembre-me" />
                 </fieldset>
-                <p>Lembre-me</p>
                 <a><p>Esqueci minha senha</p></a>
-            </div>
+            </AdditionalData>
             <fieldset form="login-form" name="submit">
-                <input type="submit" value="entrar" />
+                <SubmitButton name="submit" content="Entrar" key="submit" />
             </fieldset>
         </Container>
     )
@@ -60,73 +61,28 @@ const Container = styled.div`
     flex-direction: column;
     gap: 20px;
 
-    fieldset {
+    > form > fieldset {
         display: flex;
         flex-direction: column;
         gap: 20px;
     }
+`
 
-    fieldset[name="submit"] > input {
-        width: 100%;
-        height: 51px;
+const AdditionalData = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
 
-        border-radius: 4px;
-
-        border: none;
-        outline: none;
+    > a {
+        flex-grow: 1;
+        text-align: end;
 
         font-family: 'Poppins', sans-serif;
         font-weight: 600;
-        font-size: 18px;
-        line-height: 27px;
-        letter-spacing: 0.015em;
+        font-size: 14px;
+        line-height: 21px;
 
-        text-transform: uppercase;
-
-        cursor: pointer;
-
-        color: var(--submit-text);
-        background-color: var(--primary-color);
-
-        :hover {
-            filter: brightness(1.1);
-        }
-
-        :active {
-            filter: brightness(0.9);
-        }
-    }
-
-    #additional-data {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 5px;
-
-        input {
-            width: 20px;
-            height: 20px;
-        }
-
-        > p {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 19px;
-
-            color: var(--input-placeholder);
-        }
-
-        > a {
-            flex-grow: 1;
-            text-align: end;
-
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            line-height: 21px;
-
-            color: var(--primary-color);
-        }
+        color: var(--primary-color);
     }
 `
