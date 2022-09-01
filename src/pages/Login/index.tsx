@@ -19,16 +19,17 @@ export function Login() {
 }
 
 const Container = styled.div`
-    min-height: 100vh;
+    flex-grow: 1;
     
+    padding: 40px 20px;
+
     display: flex;
     flex-direction: column;
+    align-items: center;
 `
 
 const Main = styled.main`
-    flex-grow: 1;
-    
-    padding: 30px;
+    margin: 30px 0;
 
     display: flex;
     flex-direction: column;

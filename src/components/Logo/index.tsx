@@ -10,5 +10,5 @@ export function Logo() {
 }
 
 const Container = styled.div`
-    margin: 40px 0 0 40px;
+    width: 100%;
 `
