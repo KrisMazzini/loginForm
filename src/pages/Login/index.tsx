@@ -29,6 +29,8 @@ const Container = styled.div`
 `
 
 const Main = styled.main`
+    width: 100%;
+
     margin: 30px 0;
 
     display: flex;
@@ -38,9 +40,5 @@ const Main = styled.main`
 
     > * {
         width: 100%;
-    }
-
-    * {
-        max-width: 335px;
     }
 `
