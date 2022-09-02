@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 export type InputProps = {
@@ -13,13 +14,18 @@ type Props = InputProps & { key: string | number; }
 export function Input(props:Props) {
     const { icon, type, id, label, placeholder } = props;
 
+    function focusOnInput(event:React.MouseEvent<HTMLDivElement>) {
+        const input = event.currentTarget.querySelector('input')
+        input?.focus()
+    }
+
     return (
-        <Container>
+        <Container onClick={focusOnInput}>
             <label htmlFor={id}>{label}</label>
-            <div id="input-container">
+            <InputContainer>
                 <img src={icon} alt={`${id}-icon`} />
                 <input type={type} name={id} id={id} placeholder={placeholder} />
-            </div>
+            </InputContainer>
         </Container>
     )
 }
@@ -35,36 +41,36 @@ const Container = styled.div`
 
         color: var(--text-base);
     }
+`
 
-    #input-container {
-        height: 44px;
+const InputContainer = styled.div`
+    height: 44px;
 
-        padding: 0 12px;
+    padding: 0 12px;
 
-        display: flex;
-        align-items: center;
-        gap: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 
-        border: 1px solid var(--input-border);
-        border-radius: 4px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
 
-        input {
-            border: none;
-            outline: none;
+    input {
+        border: none;
+        outline: none;
 
-            flex-grow: 1;
-            
-            font-family: 'Roboto', sans-serif;
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 16px;
-
-            color: var(--text-base);
-            background-color: inherit;
-        }
+        flex-grow: 1;
         
-        input::placeholder{
-            color: var(--input-placeholder);
-        }
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+
+        color: var(--text-base);
+        background-color: inherit;
+    }
+
+    input::placeholder{
+        color: var(--input-placeholder);
     }
 `
