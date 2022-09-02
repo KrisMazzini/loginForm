@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import eye from "../../assets/eye.svg"
+
 export type InputProps = {
     icon: string;
     onFocusIcon: string;
@@ -24,14 +26,11 @@ type InputStyle = InputProperties & {
 export function Input(props:Props) {
     const { icon, onFocusIcon, type, id, label, placeholder } = props;
 
+    const isPassword = type === "password";
+
     const [focus, setFocus] = useState<boolean>(false)
     const [inputStyle, setInputStyle] = useState<InputStyle>(handleFocus())
-
-    function focusOnInput(event:React.MouseEvent<HTMLDivElement>) {
-        const target = event.currentTarget
-        const input = target.querySelector('input')
-        input?.focus()
-    }
+    const [inputType, setInputType] = useState<string>(type)
 
     function handleFocus():InputStyle {
         const style:InputStyle = focus ? {
@@ -47,6 +46,10 @@ export function Input(props:Props) {
         return style
     }
 
+    function togglePassword() {
+        setInputType(prev => prev === "password" ? "text" : "password")
+    }
+
     useEffect(() => {
         setInputStyle(handleFocus())
     }, [focus])
@@ -55,16 +58,19 @@ export function Input(props:Props) {
         <Container>
             <label htmlFor={id}>{label}</label>
             <InputContainer
-                onClick={focusOnInput}
                 borderColor={inputStyle.borderColor}
                 dropShadow={inputStyle.dropShadow}
             >
                 <img src={inputStyle.icon} alt={`${id}-icon`} />
                 <input 
-                    type={type} name={id} id={id} placeholder={placeholder}
+                    type={inputType} name={id} id={id} placeholder={placeholder}
                     onFocus={() => setFocus(true)}
                     onBlur={() => setFocus(false)}
                 />
+                {
+                    isPassword &&
+                    <img src={eye} alt="eye-icon" onClick={togglePassword} />
+                }
             </InputContainer>
         </Container>
     )
@@ -95,6 +101,10 @@ const InputContainer = styled.div`
     border: 1px solid ${(props:InputProperties) => props.borderColor};
     box-shadow: ${(props:InputProperties) => props.dropShadow};
     border-radius: 4px;
+
+    img {
+        cursor: pointer;
+    }
 
     input {
         border: none;
