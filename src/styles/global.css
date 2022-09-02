@@ -7,6 +7,7 @@
     --input-border: #868686;
     --input-placeholder: #a9afb9;
     --submit-text: #473404;
+    --dropshadow: #ffde88;
 }
 
 html, body, #root {

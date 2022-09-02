@@ -4,13 +4,16 @@ import { SubmitButton } from "../SubmitButton";
 import { Checkbox } from "../Checkbox";
 
 import mail from "../../assets/mail.svg"
+import mailFocus from "../../assets/mail-focus.svg"
 import lock from "../../assets/lock.svg"
+import lockFocus from "../../assets/lock-focus.svg"
 
 export function LoginForm() {
     
     const inputs:InputProps[] = [
         {
             icon: mail,
+            onFocusIcon: mailFocus,
             type: "email",
             id: "email",
             label: "E-mail",
@@ -18,6 +21,7 @@ export function LoginForm() {
         },
         {
             icon: lock,
+            onFocusIcon: lockFocus,
             type: "password",
             id: "password",
             label: "Senha",
@@ -34,6 +38,7 @@ export function LoginForm() {
                                 <Input
                                     key={input.id}
                                     icon={input.icon}
+                                    onFocusIcon={input.onFocusIcon}
                                     type={input.type}
                                     id={input.id}
                                     label={input.label}

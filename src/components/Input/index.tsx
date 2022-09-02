@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 export type InputProps = {
     icon: string;
+    onFocusIcon: string;
     type: string;
     id: string;
     label: string;
@@ -11,20 +12,59 @@ export type InputProps = {
 
 type Props = InputProps & { key: string | number; }
 
+type InputProperties = {
+    borderColor: string;
+    dropShadow: string;
+}
+
+type InputStyle = InputProperties & {
+    icon: string;
+}
+
 export function Input(props:Props) {
-    const { icon, type, id, label, placeholder } = props;
+    const { icon, onFocusIcon, type, id, label, placeholder } = props;
+
+    const [focus, setFocus] = useState<boolean>(false)
+    const [inputStyle, setInputStyle] = useState<InputStyle>(handleFocus())
 
     function focusOnInput(event:React.MouseEvent<HTMLDivElement>) {
-        const input = event.currentTarget.querySelector('input')
+        const target = event.currentTarget
+        const input = target.querySelector('input')
         input?.focus()
     }
 
+    function handleFocus():InputStyle {
+        const style:InputStyle = focus ? {
+            borderColor: "var(--primary-color)",
+            dropShadow: "0px 0px 0px 2px var(--dropshadow)",
+            icon: onFocusIcon
+        } : {
+            borderColor: "var(--input-border)",
+            dropShadow: "none",
+            icon: icon
+        }
+
+        return style
+    }
+
+    useEffect(() => {
+        setInputStyle(handleFocus())
+    }, [focus])
+
     return (
-        <Container onClick={focusOnInput}>
+        <Container>
             <label htmlFor={id}>{label}</label>
-            <InputContainer>
-                <img src={icon} alt={`${id}-icon`} />
-                <input type={type} name={id} id={id} placeholder={placeholder} />
+            <InputContainer
+                onClick={focusOnInput}
+                borderColor={inputStyle.borderColor}
+                dropShadow={inputStyle.dropShadow}
+            >
+                <img src={inputStyle.icon} alt={`${id}-icon`} />
+                <input 
+                    type={type} name={id} id={id} placeholder={placeholder}
+                    onFocus={() => setFocus(true)}
+                    onBlur={() => setFocus(false)}
+                />
             </InputContainer>
         </Container>
     )
@@ -52,7 +92,8 @@ const InputContainer = styled.div`
     align-items: center;
     gap: 5px;
 
-    border: 1px solid var(--input-border);
+    border: 1px solid ${(props:InputProperties) => props.borderColor};
+    box-shadow: ${(props:InputProperties) => props.dropShadow};
     border-radius: 4px;
 
     input {
