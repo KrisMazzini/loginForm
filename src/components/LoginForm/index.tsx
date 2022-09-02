@@ -72,7 +72,6 @@ const AdditionalData = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 5px;
 
     > a {
         justify-self: flex-end;
