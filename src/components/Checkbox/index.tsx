@@ -21,13 +21,15 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     
+    * {
+        cursor: pointer;
+    }
+
     label {
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
-
-        cursor: pointer;
 
         color: var(--input-placeholder);
     }

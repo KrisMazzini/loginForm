@@ -70,14 +70,12 @@ const Container = styled.div`
 
 const AdditionalData = styled.div`
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     gap: 5px;
 
     > a {
-        flex-grow: 1;
-        text-align: end;
-
+        justify-self: flex-end;
         font-family: 'Poppins', sans-serif;
         font-weight: 600;
         font-size: 14px;
