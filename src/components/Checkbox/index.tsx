@@ -20,11 +20,14 @@ export function Checkbox(props:Props) {
 const Container = styled.div`
     display: flex;
     align-items: center;
+    
     label {
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
+
+        cursor: pointer;
 
         color: var(--input-placeholder);
     }
