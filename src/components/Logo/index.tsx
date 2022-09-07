@@ -10,5 +10,7 @@ export function Logo() {
 }
 
 const Container = styled.div`
+    height: 28px;
     width: 100%;
+    grid-area: logo;
 `
