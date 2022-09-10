@@ -17,19 +17,10 @@ type MainProps = {
 
 export function Login() {
     const windowSize = useContext(WindowContext)
-    const [Container, setContainer] = useState<StyledComponent<"div", any, {}, never>>(getContainer())
     const [mainLayout, setMainLayout] = useState<MainProps>(getMainLayout())
 
-    function getContainer() {
-        return (
-            windowSize.width < 1150 ?
-            MobileContainer :
-            DesktopContainer
-        )
-    }
-
     function getMainLayout():MainProps {
-        return windowSize.width < 1150 ? {
+        return windowSize.width < 600 ? {
             justifyContent: "flex-start",
             margin: 0,
             maxWidth: "none"
@@ -41,26 +32,33 @@ export function Login() {
     }
 
     useEffect(() => {
-        setContainer(getContainer())
         setMainLayout(getMainLayout())
     }, [windowSize])
     
     return (
         <Container>
-            <Logo />
-            <Main justifyContent={mainLayout.justifyContent} margin={mainLayout.margin} maxWidth={mainLayout.maxWidth}>
-                <Header />
-                <LoginForm />
-                <Footer />
-            </Main>
+            <FormContainer>
+                <Logo />
+                <Main justifyContent={mainLayout.justifyContent} margin={mainLayout.margin} maxWidth={mainLayout.maxWidth}>
+                    <Header />
+                    <LoginForm />
+                    <Footer />
+                </Main>
+            </FormContainer>
             {
-                windowSize.width > 750 ? <Background/> : <></>
+                windowSize.width < 1150 ? <></> : <Background />
             }
         </Container>
     )
 }
 
-const MobileContainer = styled.div`
+const Container = styled.div`
+    flex-grow: 1;
+
+    display: flex;
+`
+
+const FormContainer = styled.div`
     flex-grow: 1;
     
     padding: 40px 20px;
@@ -68,22 +66,6 @@ const MobileContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    gap: 30px;
-`
-
-const DesktopContainer = styled.div`
-    flex-grow: 1;
-
-    padding: 40px 30px;
-    
-    display: grid;
-    grid-template-areas: 
-        "logo backgnd"
-        "main backgnd";
-
-    grid-template-rows: auto 1fr;
-    grid-template-columns: 1fr 720px;
 
     gap: 30px;
 `
@@ -98,8 +80,7 @@ const Main = styled.main`
     justify-content: ${(props:MainProps) => props.justifyContent};
     align-items: center;
 
-    grid-area: main;
-
+    
     > * {
         width: 100%;
         max-width: ${(props:MainProps) => props.maxWidth};

@@ -9,7 +9,7 @@ export function Background() {
 }
 
 const Container = styled.div`
-    grid-area: backgnd;
+    width: 720px;
 
     background-image: url(${background});
     background-size: 100% auto;
