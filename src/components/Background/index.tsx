@@ -9,7 +9,8 @@ export function Background() {
 }
 
 const Container = styled.div`
-    width: 720px;
+    min-width: 720px;
+    flex-basis: 50%;
 
     background-image: url(${background});
     background-size: 100% auto;
